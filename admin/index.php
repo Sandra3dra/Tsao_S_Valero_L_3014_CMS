@@ -42,6 +42,7 @@
         <h4>Product List</h4>
         <a href="admin_addproduct.php">Create Product</a>
     </div>
+    <?php echo !empty($message)? $message:''; ?>
     <div id="products">
         <?php while($row = $getProducts->fetch(PDO::FETCH_ASSOC)):?>
             <div class="p-item">

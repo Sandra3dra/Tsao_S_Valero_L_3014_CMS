@@ -18,11 +18,12 @@
         $p_name = trim($_POST['name']);
         $p_img = $_FILES['img'];
         $p_brand = trim($_POST['brand']);
+        $p_price = trim($_POST['price']);
         $p_review = trim($_POST['revList']);
         $p_des = trim($_POST['des']);
         $p_gen = trim($_POST['genList']);
 
-        $message = editProduct($p_id, $p_name, $p_img, $p_brand, $p_review, $p_des, $p_gen);
+        $message = editProduct($p_id, $p_name, $p_img, $p_brand, $p_price, $p_review, $p_des, $p_gen);
     }
 
 ?>
@@ -51,9 +52,13 @@
                 <label>Product Brand:</label><br>
                 <input type="text" name="brand" value="<?php echo $p_info['p_brand']; ?>"><br><br>
 
+                <label>Product Price:*</label><br>
+                <input type="number" name="price" step="0.01" value="" required><br><br>
+
                 <label>Product Review:</label><br>
                 <select name="revList">
                     <option>Please select a rating..</option>
+                    <option value="N/A">N/A</option>
                     <option value="0">0</option>
                     <option value="0.5">0.5</option>
                     <option value="1">1</option>

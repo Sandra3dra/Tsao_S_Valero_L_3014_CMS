@@ -9,12 +9,13 @@
         $p_name = trim($_POST['name']);
         $p_img = $_FILES['img'];
         $p_brand = trim($_POST['brand']);
+        $p_price = trim($_POST['price']);
         $p_review = trim($_POST['revList']);
         $p_des = trim($_POST['des']);
         $p_gen = trim($_POST['genList']);
 
-        if(!empty($p_name) && !empty($p_brand) && !empty($p_review) && !empty($p_gen)){
-            $message = addProduct($p_id, $p_name, $p_img, $p_brand, $p_review, $p_des, $p_gen);
+        if(!empty($p_name) && !empty($p_brand) && !empty($p_price) && !empty($p_review) && !empty($p_gen)){
+            $message = addProduct($p_id, $p_name, $p_img, $p_brand, $p_price, $p_review, $p_des, $p_gen);
         }else{
             $message = 'please fill in the missing information.';
         }
@@ -31,17 +32,21 @@
     <?php echo !empty($message) ? $message : ''; ?>
     <form action="admin_addproduct.php" method="post" enctype="multipart/form-data">
         <label>Product Name:*</label>
-        <input type="text" name="name" value=""><br><br>
+        <input type="text" name="name" value="" required><br><br>
 
         <label>Product Image:</label><br>
         <input type="file" name="img" value=""><br><br>
 
         <label>Product Brand:*</label><br>
-        <input type="text" name="brand" value=""><br><br>
+        <input type="text" name="brand" value="" required><br><br>
+
+        <label>Product Price:*</label><br>
+        <input type="number" name="price" step="0.01" value="" required><br><br>
 
         <label>Product Review:*</label><br>
-        <select name="revList">
+        <select name="revList" required>
             <option>Please select a rating..</option>
+            <option value="N/A">N/A</option>
             <option value="0">0</option>
             <option value="0.5">0.5</option>
             <option value="1">1</option>
@@ -59,7 +64,7 @@
         <textarea name="des"></textarea><br><br>
 
         <label>Product genre:*</label><br>
-        <select name="genList">
+        <select name="genList" required>
             <option>Please select a product genre..</option>
             <?php while ($row = $genres->fetch(PDO::FETCH_ASSOC)): ?>
                 <option value="<?php echo $row['genre_id'] ?>"><?php echo $row['genre_name']; ?></option>
