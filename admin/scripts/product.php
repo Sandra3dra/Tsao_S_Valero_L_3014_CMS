@@ -1,6 +1,6 @@
 <?php
 
-function addProduct($p_id, $p_name, $p_img, $p_brand, $p_review, $p_des, $p_gen) {
+function addProduct($p_id, $p_name, $p_img, $p_brand, $p_price, $p_review, $p_des, $p_gen) {
 
     try {
         $pdo = Database::getInstance()->getConnection();
@@ -22,8 +22,8 @@ function addProduct($p_id, $p_name, $p_img, $p_brand, $p_review, $p_des, $p_gen)
             throw new Exception('Failed to move uploaded file, check permission!');
         }
 
-        $insert_p_query = 'INSERT INTO tbl_p(p_img,p_name,p_brand,p_price,p_review,p_des)';
-        $insert_p_query .= ' VALUES(:img,:name,:brand,:review,:des)';
+        $insert_p_query = 'INSERT INTO tbl_products(p_img,p_name,p_brand,p_price,p_review,p_des)';
+        $insert_p_query .= ' VALUES(:img,:name,:brand,:price,:review,:des)';
 
         $insert_p       = $pdo->prepare($insert_p_query);
         $insert_p_result = $insert_p->execute(
@@ -31,6 +31,7 @@ function addProduct($p_id, $p_name, $p_img, $p_brand, $p_review, $p_des, $p_gen)
                 ':name'=>$p_name,
                 ':img'=>$generated_filename,
                 ':brand'=>$p_brand,
+                ':price'=>$p_price,
                 ':review'=>$p_review,
                 ':des'=>$p_des
             )
@@ -76,7 +77,7 @@ function getOneProduct($p_id){
     }
 }
 
-function editProduct($p_id, $p_name, $p_img, $p_brand, $p_review, $p_des, $p_gen) {
+function editProduct($p_id, $p_name, $p_img, $p_brand, $p_price, $p_review, $p_des, $p_gen) {
     try {
         $pdo = Database::getInstance()->getConnection();
 
@@ -97,13 +98,14 @@ function editProduct($p_id, $p_name, $p_img, $p_brand, $p_review, $p_des, $p_gen
             throw new Exception('Failed to move uploaded file, check permission!');
         }
     
-        $update_p_query = 'UPDATE `tbl_products` SET p_name =:name, p_img =:img, p_brand =:brand, p_review =:review, p_des =:des WHERE p_id =:id';
+        $update_p_query = 'UPDATE `tbl_products` SET p_name =:name, p_img =:img, p_brand =:brand, p_price =:price, p_review =:review, p_des =:des WHERE p_id =:id';
         $single_update = $pdo->prepare($update_p_query);
         $updated_single = $single_update->execute(
             array(
                 ':name'=>$p_name,
                 ':img'=>$generated_filename,
                 ':brand'=>$p_brand,
+                ':price'=>$p_price,
                 ':review'=>$p_review,
                 ':des'=>$p_des,
                 ':id'=>$p_id
