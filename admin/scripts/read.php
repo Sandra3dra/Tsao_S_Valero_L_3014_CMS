@@ -57,4 +57,25 @@ function getProductsByFilter($args){
     }else{
         return 'There was a problem accessing the info';
     }
-} 
+}
+
+function searchProduct($search) {
+    $pdo = Database::getInstance()->getConnection();
+
+    $querySearch = 'SELECT * FROM tbl_products WHERE p_name LIKE :search OR p_des LIKE :search';
+    $results = $pdo->prepare($querySearch);
+    $results->execute(
+        array(
+            ':search'=>"%$search%"
+        )
+    );
+
+    // echo $results->debugDumpParams();
+    // exit;
+
+    if($results){
+        return $results;
+    }else{
+        return 'There was a problem accessing the info';
+    }
+}
