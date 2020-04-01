@@ -12,4 +12,8 @@
             <li><a href="index.php">All</a></li>
         </ul>
     </nav>
+    <form action="index.php" method="post">
+        <input type="text" name="search" value="" placeholder="search name or descriptions">
+        <button type="submit" name="submit-search">Search</button>
+    </form>
 </header>

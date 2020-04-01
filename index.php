@@ -12,11 +12,14 @@
             'filter'=>$_GET['filter']
         );
         $getProducts = getProductsByFilter($args);
+    } else if(isset($_POST['submit-search'])) {
+        $search = trim($_POST['search']);
+        $getProducts = searchProduct($search);
     } else {
         $p_table = 'tbl_products';
         $getProducts = getAll($p_table);
     }
-    
+
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +33,7 @@
 <body>
 
     <?php include "templates/header.php"; ?>
-    
+    <?php echo !empty($message)? $message:''; ?>
     <?php while($row = $getProducts->fetch(PDO::FETCH_ASSOC)):?>
     <div class="movie-item">
         <h2><?php echo $row['p_name'];?></h2>
