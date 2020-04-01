@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 01, 2020 at 03:22 AM
+-- Generation Time: Apr 01, 2020 at 05:08 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.3.8
 
@@ -52,8 +52,8 @@ INSERT INTO `tbl_genre` (`genre_id`, `genre_name`) VALUES
 
 CREATE TABLE `tbl_products` (
   `p_id` int(11) NOT NULL,
-  `p_img` varchar(60) NOT NULL,
-  `p_name` varchar(60) NOT NULL,
+  `p_img` varchar(120) NOT NULL,
+  `p_name` varchar(100) NOT NULL,
   `p_brand` varchar(20) NOT NULL,
   `p_price` varchar(6) NOT NULL,
   `p_review` varchar(5) NOT NULL,
@@ -152,7 +152,8 @@ INSERT INTO `tbl_p_genre` (`p_gen_id`, `p_id`, `genre_id`) VALUES
 (32, 32, 7),
 (33, 33, 7),
 (34, 34, 7),
-(35, 35, 7);
+(35, 35, 7),
+(36, 36, 1);
 
 -- --------------------------------------------------------
 
@@ -229,13 +230,13 @@ ALTER TABLE `tbl_genre`
 -- AUTO_INCREMENT for table `tbl_products`
 --
 ALTER TABLE `tbl_products`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `tbl_p_genre`
 --
 ALTER TABLE `tbl_p_genre`
-  MODIFY `p_gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `p_gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
