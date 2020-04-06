@@ -26,7 +26,7 @@
         <h4><?php echo $row['p_brand'];?></h4>
         <p>Price: &#36;<?php echo $row['p_price'];?></p>
         <p>Review: <?php echo $row['p_review'];?></p>
-        <img src="images/<?php echo $row['p_img'];?>" alt="<?php echo $row['p_name'];?>"/>
+        <img width="400px" src="images/<?php echo $row['p_img'];?>" alt="<?php echo $row['p_name'];?>"/>
         <p><?php echo $row['p_des'];?></p>
         <a href="index.php">go back</a>
     </div>

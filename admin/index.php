@@ -7,11 +7,11 @@
 
     if(!empty($_GET['createP'])){
         $msg = $_GET['createP'];
-        $create = '<p class="actions">'.$msg.'</p>';
+        $message = '<p class="actions">'.$msg.'</p>';
     }
     if(!empty($_GET['editP'])){
         $msg = $_GET['editP'];
-        $edit = '<p class="actions">'.$msg.'</p>';
+        $message = '<p class="actions">'.$msg.'</p>';
     }
     if(!empty($_GET['deleteP'])){
         $msg = $_GET['deleteP'];

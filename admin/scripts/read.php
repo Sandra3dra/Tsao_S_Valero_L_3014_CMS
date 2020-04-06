@@ -49,7 +49,7 @@ function getProductsByFilter($args){
         )
     );
 
-    // echo $queryAll;
+    // echo $results->debugDumpParams();
     // exit;
 
     if($results){

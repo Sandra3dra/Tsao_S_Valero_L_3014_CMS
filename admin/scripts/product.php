@@ -1,6 +1,6 @@
 <?php
 
-function addProduct($p_id, $p_name, $p_img, $p_brand, $p_price, $p_review, $p_des, $p_gen) {
+function addProduct($p_name, $p_img, $p_brand, $p_price, $p_review, $p_des, $p_cat) {
 
     try {
         $pdo = Database::getInstance()->getConnection();
@@ -39,13 +39,13 @@ function addProduct($p_id, $p_name, $p_img, $p_brand, $p_price, $p_review, $p_de
 
         $last_uploaded_id = $pdo->lastInsertId();
         if ($insert_p_result && !empty($last_uploaded_id)) {
-            $update_genre_query = 'INSERT INTO tbl_p_genre(p_id, genre_id) VALUES(:p_id, :genre_id)';
-            $update_genre       = $pdo->prepare($update_genre_query);
+            $update_cat_query = 'INSERT INTO tbl_p_category(p_id, cat_id) VALUES(:p_id, :cat_id)';
+            $update_cat      = $pdo->prepare($update_cat_query);
 
-            $update_genre_result = $update_genre->execute(
+            $update_cat_result = $update_cat->execute(
                 array(
                     ':p_id' => $last_uploaded_id,
-                    ':genre_id'  => $p_gen
+                    ':cat_id'  => $p_cat
                 )
             );
         }
@@ -77,7 +77,27 @@ function getOneProduct($p_id){
     }
 }
 
-function editProduct($p_id, $p_name, $p_img, $p_brand, $p_price, $p_review, $p_des, $p_gen) {
+function getCurrentCat($p_id) {
+    $pdo = Database::getInstance()->getConnection();
+    $get_cat_query = 'SELECT * FROM `tbl_p_category` WHERE p_id =:id';
+    $cat_get = $pdo->prepare($get_cat_query);
+    $got_single = $cat_get->execute(
+        array(
+            ':id'=>$p_id
+        )
+    );
+
+    // echo $p_get->debugDumpParams();
+    // exit;
+
+    if($got_single && $cat_get->rowCount()){
+        return $cat_get;
+    }else{
+        return false;
+    }
+}
+
+function editProduct($p_id, $p_name, $p_img, $p_brand, $p_price, $p_review, $p_des, $p_cat) {
     try {
         $pdo = Database::getInstance()->getConnection();
 
@@ -113,14 +133,15 @@ function editProduct($p_id, $p_name, $p_img, $p_brand, $p_price, $p_review, $p_d
         );
     
         if($updated_single){
-            $update_genre_query = 'UPDATE `tbl_p_genre` SET p_id =:p_id, genre_id =:genre_id';
-            $update_genre       = $pdo->prepare($update_genre_query);
-            $update_genre_result = $update_genre->execute(
+            $update_cat_query = 'UPDATE `tbl_p_category` SET cat_id =:cat_id WHERE p_id =:p_id';
+            $update_cat       = $pdo->prepare($update_cat_query);
+            $update_cat_result = $update_cat->execute(
                 array(
-                    ':p_id' => $p_id,
-                    ':genre_id'  => $p_gen
+                    ':p_id'=>$p_id,
+                    ':cat_id'=>$p_cat
                 )
             );
+            
             redirect_to('index.php?editP=You have edited the product sucessfully!');
             // return '<p>You have updated sucessfully!</p>';
         }else{
@@ -129,6 +150,43 @@ function editProduct($p_id, $p_name, $p_img, $p_brand, $p_price, $p_review, $p_d
     } catch (Exception $e) {
         $error = $e->getMessage();
         return $error;
+    }
+}
+
+function editProductNoImg($p_id, $p_name, $p_brand, $p_price, $p_review, $p_des, $p_cat) {
+    $pdo = Database::getInstance()->getConnection();
+
+    $update_p_query = 'UPDATE `tbl_products` SET p_name =:name, p_brand =:brand, p_price =:price, p_review =:review, p_des =:des WHERE p_id =:id';
+    $single_update = $pdo->prepare($update_p_query);
+    $updated_single = $single_update->execute(
+        array(
+            ':name'=>$p_name,
+            ':brand'=>$p_brand,
+            ':price'=>$p_price,
+            ':review'=>$p_review,
+            ':des'=>$p_des,
+            ':id'=>$p_id
+        )
+    );
+
+        // echo $single_update->debugDumpParams();
+        // exit;
+
+    if($updated_single){
+        $update_cat_query = 'UPDATE `tbl_p_category` SET cat_id =:c_id WHERE p_id =:p_id';
+        $update_cat       = $pdo->prepare($update_cat_query);
+        $update_cat_result = $update_cat->execute(
+            array(
+                ':c_id'=>$p_cat,
+                ':p_id'=>$p_id
+            )
+        );
+        // echo $update_cat->debugDumpParams();
+        // exit;
+        redirect_to('index.php?editP=You have edited the product sucessfully!');
+        // return '<p>You have updated sucessfully!</p>';
+    }else{
+        return 'Something went wrong with the update.';
     }
 }
 
@@ -145,6 +203,13 @@ function deleteProduct($p_id) {
     //3. If it goes through, redirect to admin_deletep.php
     // otherwise, return false
     if($delete_p_result && $delete_p_set->rowCount() > 0){
+        $delete_cat_query = 'DELETE FROM tbl_p_category WHERE p_id=:id';
+        $delete_cat       = $pdo->prepare($delete_cat_query);
+        $delete_cat_result = $delete_cat->execute(
+            array(
+                ':p_id' => $p_id
+            )
+        );
         redirect_to('index.php?deleteP=You have deleted the product sucessfully.');
     }else{
         return false;
