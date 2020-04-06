@@ -4,11 +4,11 @@
     if(isset($_GET['filter'])){
         $args = array(
             'tbl'=>'tbl_products',
-            'tbl2'=>'tbl_genre',
-            'tbl3'=>'tbl_p_genre',
+            'tbl2'=>'tbl_category',
+            'tbl3'=>'tbl_p_category',
             'col'=>'p_id',
-            'col2'=>'genre_id',
-            'col3'=>'genre_name',
+            'col2'=>'cat_id',
+            'col3'=>'cat_name',
             'filter'=>$_GET['filter']
         );
         $getProducts = getProductsByFilter($args);
@@ -38,7 +38,7 @@
     <div class="movie-item">
         <h2><?php echo $row['p_name'];?></h2>
         <h4><?php echo $row['p_brand'];?></h4>
-        <img src="images/<?php echo $row['p_img'];?>" alt="<?php echo $row['p_name'];?>"/>
+        <img width="400px" src="images/<?php echo $row['p_img'];?>" alt="<?php echo $row['p_name'];?>"/>
         <a href="details.php?id=<?php echo $row['p_id'];?>">Read More</a>
     </div>
     <?php endwhile;?>

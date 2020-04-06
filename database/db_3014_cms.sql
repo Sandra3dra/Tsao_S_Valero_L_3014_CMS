@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 01, 2020 at 05:08 PM
+-- Generation Time: Apr 05, 2020 at 11:23 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.3.8
 
@@ -23,19 +23,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_genre`
+-- Table structure for table `tbl_category`
 --
 
-CREATE TABLE `tbl_genre` (
-  `genre_id` int(11) NOT NULL,
-  `genre_name` varchar(20) NOT NULL
+CREATE TABLE `tbl_category` (
+  `cat_id` int(11) NOT NULL,
+  `cat_name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tbl_genre`
+-- Dumping data for table `tbl_category`
 --
 
-INSERT INTO `tbl_genre` (`genre_id`, `genre_name`) VALUES
+INSERT INTO `tbl_category` (`cat_id`, `cat_name`) VALUES
 (1, 'running'),
 (2, 'training'),
 (3, 'boots'),
@@ -104,20 +104,20 @@ INSERT INTO `tbl_products` (`p_id`, `p_img`, `p_name`, `p_brand`, `p_price`, `p_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_p_genre`
+-- Table structure for table `tbl_p_category`
 --
 
-CREATE TABLE `tbl_p_genre` (
-  `p_gen_id` int(11) NOT NULL,
+CREATE TABLE `tbl_p_category` (
+  `p_cat_id` int(11) NOT NULL,
   `p_id` int(11) NOT NULL,
-  `genre_id` int(11) NOT NULL
+  `cat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tbl_p_genre`
+-- Dumping data for table `tbl_p_category`
 --
 
-INSERT INTO `tbl_p_genre` (`p_gen_id`, `p_id`, `genre_id`) VALUES
+INSERT INTO `tbl_p_category` (`p_cat_id`, `p_id`, `cat_id`) VALUES
 (1, 1, 1),
 (2, 2, 1),
 (3, 3, 1),
@@ -193,10 +193,10 @@ INSERT INTO `tbl_user` (`user_id`, `user_fname`, `user_name`, `user_pass`, `user
 --
 
 --
--- Indexes for table `tbl_genre`
+-- Indexes for table `tbl_category`
 --
-ALTER TABLE `tbl_genre`
-  ADD PRIMARY KEY (`genre_id`);
+ALTER TABLE `tbl_category`
+  ADD PRIMARY KEY (`cat_id`);
 
 --
 -- Indexes for table `tbl_products`
@@ -205,10 +205,10 @@ ALTER TABLE `tbl_products`
   ADD PRIMARY KEY (`p_id`);
 
 --
--- Indexes for table `tbl_p_genre`
+-- Indexes for table `tbl_p_category`
 --
-ALTER TABLE `tbl_p_genre`
-  ADD PRIMARY KEY (`p_gen_id`);
+ALTER TABLE `tbl_p_category`
+  ADD PRIMARY KEY (`p_cat_id`);
 
 --
 -- Indexes for table `tbl_user`
@@ -221,10 +221,10 @@ ALTER TABLE `tbl_user`
 --
 
 --
--- AUTO_INCREMENT for table `tbl_genre`
+-- AUTO_INCREMENT for table `tbl_category`
 --
-ALTER TABLE `tbl_genre`
-  MODIFY `genre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `tbl_category`
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_products`
@@ -233,10 +233,10 @@ ALTER TABLE `tbl_products`
   MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
--- AUTO_INCREMENT for table `tbl_p_genre`
+-- AUTO_INCREMENT for table `tbl_p_category`
 --
-ALTER TABLE `tbl_p_genre`
-  MODIFY `p_gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+ALTER TABLE `tbl_p_category`
+  MODIFY `p_cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
