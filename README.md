@@ -40,12 +40,10 @@ Username: docker_u
 Password: docker_p
 ```
 
-## Workspaces (Designers)
-
 ## Authors
 
 * **Sandra** - *Back-End* - https://github.com/SandraTsao
-* **Luisa** - *Designer* - https://github.com/LuDesigner
+* **Luisa** - *Designer* - https://github.com/luisavm
 
 ## Future Plans
-- needs to be updated
+- styling needs to be updated
