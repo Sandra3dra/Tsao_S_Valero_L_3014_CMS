@@ -7,7 +7,7 @@
 
     if(isset($_POST['submit'])){
 
-        if(!empty($p_name) && !empty($p_brand) && !empty($p_price) && !empty($p_review) && !empty($p_cat) && $_FILES['img']['size'] > 0 && $_FILES['img']['error'] == 0){
+        if(!empty($_POST['name']) && !empty($_POST['brand']) && !empty($_POST['price']) && !empty($_POST['revList']) && !empty($_POST['catList']) && $_FILES['img']['size'] > 0 && $_FILES['img']['error'] == 0){
             $p_name = trim($_POST['name']);
             $p_img = $_FILES['img'];
             $p_brand = trim($_POST['brand']);
