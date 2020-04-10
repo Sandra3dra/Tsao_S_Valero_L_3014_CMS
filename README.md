@@ -24,7 +24,7 @@ In this project, you will be able to search through 35 products from Sport Chek 
    ```
 2. Open the folder and run docker-compose
    ```
-   cd Sandra_T_Luisa_V_3014_CMS
+   cd Tsao_S_Valero_L_3014_CMS
    docker-compose up
    ```
 3. When you finished work, you can turn if off by doing 
